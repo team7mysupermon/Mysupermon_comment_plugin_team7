@@ -1,3 +1,5 @@
+import org.json.JSONObject;
+
 import java.net.InetAddress;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,7 +26,11 @@ public class Test {
         map.putIfAbsent("CURRENT_TIME", getTimeNow());
         map.putIfAbsent("IP_ADDRESS", getIP());
 
-        return query + map;
+        JSONObject json = new JSONObject(map);
+
+        query = query.concat("/*" + json + "*/");
+
+        return query;
     }
 
     private static String getLocalHostName() {
