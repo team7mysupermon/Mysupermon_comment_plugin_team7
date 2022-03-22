@@ -74,14 +74,32 @@ public class Test {
     }
 
     private static String getPackageName(Object classObject) {
-        return classObject.getClass().getPackage().getName();
+        String value = "";
+        try {
+            value = classObject.getClass().getPackage().getName();
+        } catch (NullPointerException e) {
+            System.out.println("No package found");
+        }
+        return value;
     }
 
     private static String getClassName(Object classObject) {
-        return classObject.getClass().getName();
+        String value = "";
+        try {
+            value = classObject.getClass().getName();
+        } catch (NullPointerException e) {
+            System.out.println("No class found");
+        }
+        return value;
     }
 
     private static String getMethodName(Object classObject) {
-        return classObject.getClass().getEnclosingMethod().getName();
+        String value = "";
+        try {
+            value = classObject.getClass().getEnclosingMethod().getName();
+        } catch (NullPointerException e) {
+            System.out.println("No method found");
+        }
+        return value;
     }
 }
