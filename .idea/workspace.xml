@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f178de4c-8b39-43aa-aa73-0ca772e85eb6" name="Default Changelist" comment="Set up the project structure">
+    <list default="true" id="f178de4c-8b39-43aa-aa73-0ca772e85eb6" name="Default Changelist" comment="Added all needed information methods that MySuperMon needed">
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/${project.build.directory}/classes/Test$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/${project.build.directory}/classes/Test$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/${project.build.directory}/classes/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/${project.build.directory}/classes/Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Mysupermon_comment_plugin_team7.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Mysupermon_comment_plugin_team7.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -15,6 +19,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="26hNA9siNERQ4D24NDPtoJNDI1R" />
@@ -25,6 +34,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -33,17 +43,6 @@
     <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Test" />
       <module name="Mysupermon_comment_plugin_team7" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -62,14 +61,36 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1647871716694</updated>
-      <workItem from="1647871722857" duration="2616000" />
+      <workItem from="1647871722857" duration="3562000" />
+      <workItem from="1647954384640" duration="5253000" />
     </task>
+    <task id="LOCAL-00001" summary="Added all needed information methods that MySuperMon needed">
+      <created>1647878079782</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1647878079782</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added all needed information methods that MySuperMon needed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added all needed information methods that MySuperMon needed" />
   </component>
 </project>
