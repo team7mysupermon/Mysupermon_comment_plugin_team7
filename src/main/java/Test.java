@@ -1,5 +1,3 @@
-import netscape.javascript.JSObject;
-
 import java.net.InetAddress;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +24,7 @@ public class Test {
         map.putIfAbsent("CURRENT_TIME", getTimeNow());
         map.putIfAbsent("IP_ADDRESS", getIP());
 
-        return query + map.toString();
+        return query + map;
     }
 
     private static String getLocalHostName() {
