@@ -4,25 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f178de4c-8b39-43aa-aa73-0ca772e85eb6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+    <list default="true" id="f178de4c-8b39-43aa-aa73-0ca772e85eb6" name="Default Changelist" comment="Set up the project structure">
+      <change beforePath="$PROJECT_DIR$/${project.build.directory}/classes/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/${project.build.directory}/classes/Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="26h7itSZaryvyjTVKKnGinsuBXv" />
+  <component name="ProjectId" id="26hNA9siNERQ4D24NDPtoJNDI1R" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -32,11 +27,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-  </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Sebastian\ITU\4. Semester\ISE\Our App\Mysupermon_comment_plugin_team7\.idea" />
-    </key>
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunManager">
     <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -66,12 +57,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f178de4c-8b39-43aa-aa73-0ca772e85eb6" name="Default Changelist" comment="" />
-      <created>1647864105781</created>
+      <changelist id="f178de4c-8b39-43aa-aa73-0ca772e85eb6" name="Default Changelist" comment="Set up the project structure" />
+      <created>1647871716694</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1647864105781</updated>
-      <workItem from="1647864113117" duration="3143000" />
+      <updated>1647871716694</updated>
+      <workItem from="1647871722857" duration="2616000" />
     </task>
     <servers />
   </component>
@@ -79,14 +70,6 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
