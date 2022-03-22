@@ -37,6 +37,7 @@ public class Test {
         String value = "";
 
         try {
+            //To get the IP address
             InetAddress inetAddress = InetAddress.getLocalHost();
 
             value = inetAddress.getHostName();
