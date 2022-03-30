@@ -18,11 +18,11 @@ public class Test {
     public static String combine(String query, Object classObject) {
         HashMap<String, Object> map = new HashMap<>();
 
-        map.putIfAbsent("METHODNAME", getMethodName(classObject));
+        map.putIfAbsent("METHODNAME", getMethodNameFromException());
         map.putIfAbsent("HOST_NAME", getHostName());
         map.putIfAbsent("LOCALHOST", getLocalHostName());
         map.putIfAbsent("PACKAGENAME", getPackageName(classObject));
-        map.putIfAbsent("CLASSNAME", getClassName(classObject));
+        map.putIfAbsent("CLASSNAME", getClassNameFromClassWithNameAsInput("Test"));
         map.putIfAbsent("CURRENT_TIME", getTimeNow());
         map.putIfAbsent("IP_ADDRESS", getIP());
 
@@ -107,5 +107,27 @@ public class Test {
             System.out.println("No method found");
         }
         return value;
+    }
+
+    private static String getMethodNameFromException(){
+        String methodName = new Exception().getStackTrace()[2].getMethodName();
+        return methodName;
+    }
+
+    public static String getClassNameFromException(){
+        String className = new Exception().getStackTrace()[0].getClassName();
+        String thread = Thread.currentThread().getStackTrace()[3].getClassName();
+        return thread;
+    }
+
+    public static String getClassNameFromClassWithNameAsInput(String className) {
+        Class c = null;
+
+        try {
+            c = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return c.getName();
     }
 }
