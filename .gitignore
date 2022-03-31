@@ -84,8 +84,8 @@ fabric.properties
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
 
 # *.iml
-# modules.xml
-# .idea/misc.xml
+modules.xml
+.idea/misc.xml
 # *.ipr
 
 # Sonarlint plugin
@@ -173,6 +173,12 @@ buildNumber.properties
 # Ignore all local history of files
 .history
 .ionide
+
+# Version control
+vcs.xml
+
+# MacOS files
+.DS_Store
 
 # Support for Project snippet scope
 
