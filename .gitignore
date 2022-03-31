@@ -84,8 +84,8 @@ fabric.properties
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
 
 # *.iml
-# modules.xml
-# .idea/misc.xml
+modules.xml
+.idea/misc.xml
 # *.ipr
 
 # Sonarlint plugin
@@ -175,5 +175,9 @@ buildNumber.properties
 .ionide
 
 # Support for Project snippet scope
+
+### MacOS Patch ###
+# Files to be ignored from Mac
+.DS_Store
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,intellij,java,maven

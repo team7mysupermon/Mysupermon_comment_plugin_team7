@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.mysupermon_team7.comment_plugin</groupId>
-    <artifactId>comment_plugin</artifactId>
+    <artifactId>Mysupermon_comment_plugin_team7</artifactId>
     <packaging>jar</packaging>
     <version>1</version>
 
@@ -26,7 +26,8 @@
     </dependencies>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
 </project>
