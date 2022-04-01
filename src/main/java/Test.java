@@ -7,6 +7,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 public class Test extends org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate {
+    public static void methodTOBEOVERWRITEN(String _string){
+
+        //String _tempString = concatenateSystemData(_string);
+
+        // return super.methodTOBEOVERWRITEN(_tempString);
+    }
+
+    public static String addSystemData() {
+        //Jeg hade osman og alexander, de kæmpe røvhuller
+
+
+        return "";
+    }
+
     public Test(DataSource dataSource) {
         super(dataSource);
     }
