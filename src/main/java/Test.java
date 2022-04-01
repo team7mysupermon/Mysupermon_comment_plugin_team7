@@ -1,11 +1,16 @@
 import org.json.JSONObject;
 
+import javax.sql.DataSource;
 import java.net.InetAddress;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
-public class Test {
+public class Test extends org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate {
+    public Test(DataSource dataSource) {
+        super(dataSource);
+    }
+
     public static void main(String[] args) {
         //To get package, class and method name
         Object object = new Object(){};
