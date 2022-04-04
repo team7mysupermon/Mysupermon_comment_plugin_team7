@@ -1,4 +1,5 @@
 import org.json.JSONObject;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import javax.sql.DataSource;
 import java.net.InetAddress;
@@ -6,8 +7,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
-public class Test extends org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate {
-    public Test(DataSource dataSource) {
+public class MySuperMonNamedParameterJdbcTemplate extends NamedParameterJdbcTemplate {
+    public MySuperMonNamedParameterJdbcTemplate(DataSource dataSource) {
         super(dataSource);
     }
 
