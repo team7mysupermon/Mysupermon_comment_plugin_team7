@@ -13,7 +13,7 @@ public class MySuperMonNamedParameterJdbcTemplate extends NamedParameterJdbcTemp
     }
 
     public static void main(String[] args) {
-        String query = "Select * from difar";
+        String query = "SELECT * FROM difar";
 
         System.out.println(CommentAssistant.addSystemData(query));
     }
