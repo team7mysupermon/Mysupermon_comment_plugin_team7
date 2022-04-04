@@ -7,49 +7,38 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 public class Test extends org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate {
-    public static void methodTOBEOVERWRITEN(String _string){
-
-        //String _tempString = concatenateSystemData(_string);
-
-        // return super.methodTOBEOVERWRITEN(_tempString);
-    }
-
-    public static String addSystemData() {
-        //Jeg hade osman og alexander, de kæmpe røvhuller
-
-
-        return "";
-    }
-
     public Test(DataSource dataSource) {
         super(dataSource);
     }
 
     public static void main(String[] args) {
-        //To get package, class and method name
-        Object object = new Object(){};
-
         String query = "Select * from difar";
 
-        System.out.println(combine(query, object));
+        System.out.println(addSystemData(query));
     }
 
-    public static String combine(String query, Object classObject) {
+    public static void methodTOBEOVERWRITEN(String _string){
+
+        //String _tempString = addSystemData(_string);
+
+        // return super.methodTOBEOVERWRITEN(_tempString);
+    }
+
+    private static String addSystemData(String query) {
         HashMap<String, Object> map = new HashMap<>();
 
         map.putIfAbsent("METHODNAME", getMethodNameFromException());
         map.putIfAbsent("HOST_NAME", getHostName());
         map.putIfAbsent("LOCALHOST", getLocalHostName());
-        map.putIfAbsent("PACKAGENAME", getPackageName(classObject));
-        map.putIfAbsent("CLASSNAME", getClassNameFromClassWithNameAsInput("Test"));
+        map.putIfAbsent("PACKAGENAME", getPackageNameFromThread());
+        map.putIfAbsent("CLASSNAME", getClassNameFromThread());
         map.putIfAbsent("CURRENT_TIME", getTimeNow());
         map.putIfAbsent("IP_ADDRESS", getIP());
 
         JSONObject json = new JSONObject(map);
 
-        query = query.concat("/*" + json + "*/");
 
-        return query;
+        return query.concat("/*" + json + "/*");
     }
 
     private static String getLocalHostName() {
@@ -98,12 +87,37 @@ public class Test extends org.springframework.jdbc.core.namedparam.NamedParamete
         return dtf.format(now);
     }
 
-    private static String getPackageName(Object classObject) {
+    private static String getMethodNameFromException(){
+        return new Exception().getStackTrace()[2].getMethodName();
+    }
+
+    public static String getClassNameFromThread(){
+        return Thread.currentThread().getStackTrace()[3].getClassName();
+    }
+
+    public static String getPackageNameFromThread(){
+        return Thread.currentThread().getStackTrace()[3].getClass().getPackage().getName();
+    }
+
+    //Other methods for getting system information
+    /*
+    public static String getClassNameFromClassWithNameAsInput(String className) {
+        Class c = null;
+
+        try {
+            c = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return c.getName();
+    }
+
+    private static String getMethodName(Object classObject) {
         String value = "";
         try {
-            value = classObject.getClass().getPackage().getName();
+            value = classObject.getClass().getEnclosingMethod().getName();
         } catch (NullPointerException e) {
-            System.out.println("No package found");
+            System.out.println("No method found");
         }
         return value;
     }
@@ -118,35 +132,14 @@ public class Test extends org.springframework.jdbc.core.namedparam.NamedParamete
         return value;
     }
 
-    private static String getMethodName(Object classObject) {
+    private static String getPackageName(Object classObject) {
         String value = "";
         try {
-            value = classObject.getClass().getEnclosingMethod().getName();
+            value = classObject.getClass().getPackage().getName();
         } catch (NullPointerException e) {
-            System.out.println("No method found");
+            System.out.println("No package found");
         }
         return value;
     }
-
-    private static String getMethodNameFromException(){
-        String methodName = new Exception().getStackTrace()[2].getMethodName();
-        return methodName;
-    }
-
-    public static String getClassNameFromException(){
-        String className = new Exception().getStackTrace()[0].getClassName();
-        String thread = Thread.currentThread().getStackTrace()[3].getClassName();
-        return thread;
-    }
-
-    public static String getClassNameFromClassWithNameAsInput(String className) {
-        Class c = null;
-
-        try {
-            c = Class.forName(className);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return c.getName();
-    }
+     */
 }
