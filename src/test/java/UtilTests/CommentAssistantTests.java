@@ -3,12 +3,10 @@ package UtilTests;
 import Util.CommentAssistant;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
 
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.time.*;
 import java.time.Month;
 
@@ -18,8 +16,6 @@ public class CommentAssistantTests {
 
     @BeforeAll
     public static void setUp() {
-        //Clock clock = Clock.fixed(Instant.parse("2007-12-03T10:15:30.00Z"), ZoneId.of("UTC"));
-        //LocalDateTime dateTime = LocalDateTime.now(clock);
         LocalDateTime dateTime = LocalDateTime.of(2015, Month.JULY, 29, 19, 30, 40);
         mockStatic(LocalDateTime.class);
         when(LocalDateTime.now()).thenReturn(dateTime);
@@ -31,35 +27,48 @@ public class CommentAssistantTests {
             when(InetAddress.getLocalHost()).thenReturn(address);
             when(InetAddress.getLocalHost().getHostName()).thenReturn(expectedLocalHost);
             when(InetAddress.getLocalHost().getHostAddress()).thenReturn(expectedLocalHost);
-        }catch (Exception e){}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         CommentAssistant.addSystemData("test");
     }
 
     @Test
-    public void getLocalHostName_ReturnsHostNameAndIP(){
-        Assertions.assertEquals(expectedLocalHost+"/"+expectedIP, CommentAssistant.getLocalHostName());
+    public void getLocalHostName_ReturnsHostNameAndIP() {
+        String expected = expectedLocalHost + "/" + expectedIP;
+        String actual = CommentAssistant.getLocalHostName();
+
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void getHostName_ReturnsHostName(){
-        Assertions.assertEquals(expectedLocalHost,CommentAssistant.getHostName());
+        String expected = expectedLocalHost;
+        String actual = CommentAssistant.getHostName();
+
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void getIP_ReturnsIpAdress(){
-        Assertions.assertEquals(expectedIP, CommentAssistant.getIP());
+        String actual = expectedIP;
+        String expected = CommentAssistant.getIP();
+
+        Assertions.assertEquals(expected, actual);
     }
 
 
     @Test
-    public void getTimeNow() {
-        String dateTimeExpected = "2015/07/29 19:30:40";
+    public void getTimeNow_ReturnsCurrentTime() {
+        String expected = "2015/07/29 19:30:40";
+        String actual = CommentAssistant.getTime();
 
-        Assertions.assertEquals(dateTimeExpected, CommentAssistant.getTime());
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    public void getMethodNameTest() {
+    public void getMethodName_GivenMethodCall_ReturnsMethodName() {
         String expected = "setUp";
         String actual = CommentAssistant.getMethodName();
 
@@ -67,7 +76,7 @@ public class CommentAssistantTests {
     }
 
     @Test
-    public void getClassNameTest() {
+    public void getClassName_GivenMethodHasClass_ReturnsClassName() {
         String expected = "UtilTests.CommentAssistantTests";
         String actual = CommentAssistant.getClassName();
 
@@ -75,7 +84,7 @@ public class CommentAssistantTests {
     }
 
     @Test
-    public void getPackageNameTest(){
+    public void getPackageName_GivenClassHasPackage_ReturnsPackageName(){
         String expected = "UtilTests";
         String actual = CommentAssistant.getPackageName();
 
