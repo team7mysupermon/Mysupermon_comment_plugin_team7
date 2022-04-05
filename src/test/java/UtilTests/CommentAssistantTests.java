@@ -11,26 +11,27 @@ import java.time.*;
 import java.time.Month;
 
 public class CommentAssistantTests {
-    static String expectedLocalHost = "localhost";
-    static String expectedIP = "192.168.1";
+    static String expectedLocalHost = "testLocalHost";
+    static String expectedIP = "192.168.0.9";
 
     @BeforeAll
     public static void setUp() {
+        //Creating mock for date time
         LocalDateTime dateTime = LocalDateTime.of(2015, Month.JULY, 29, 19, 30, 40);
         mockStatic(LocalDateTime.class);
         when(LocalDateTime.now()).thenReturn(dateTime);
 
-        InetAddress address;
+        //Creating mock for InetAddress. IP + Hostname
         try {
-            address = InetAddress.getLocalHost();
+            InetAddress address = InetAddress.getByName(expectedIP);
             mockStatic(InetAddress.class);
             when(InetAddress.getLocalHost()).thenReturn(address);
             when(InetAddress.getLocalHost().getHostName()).thenReturn(expectedLocalHost);
-            when(InetAddress.getLocalHost().getHostAddress()).thenReturn(expectedLocalHost);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        //Calling class with test string
         CommentAssistant.addSystemData("test");
     }
 
@@ -52,8 +53,8 @@ public class CommentAssistantTests {
 
     @Test
     public void getIP_ReturnsIpAdress(){
-        String actual = expectedIP;
-        String expected = CommentAssistant.getIP();
+        String expected = expectedIP;
+        String actual= CommentAssistant.getIP();
 
         Assertions.assertEquals(expected, actual);
     }
