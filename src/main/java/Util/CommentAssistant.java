@@ -14,6 +14,7 @@ public class CommentAssistant {
     private static String className;
     private static String time;
     private static String packageName;
+    private static String finalString;
 
 
     public static String addSystemData(String query) {
@@ -21,7 +22,7 @@ public class CommentAssistant {
 
         setVariables();
 
-        //Put in the order that they are in the JSON object
+        // Put in the order that they are in the JSON object
         map.putIfAbsent("METHODNAME", methodName);
         map.putIfAbsent("HOST_NAME", hostName);
         map.putIfAbsent("LOCALHOST", localHostName);
@@ -32,11 +33,12 @@ public class CommentAssistant {
 
         JSONObject json = new JSONObject(map);
 
-        return query.concat("/*" + json + "*/");
+        finalString = query.concat("/*" + json + "*/");
+
+        return finalString;
     }
 
     private static void setVariables() {
-        // Set all variables
         setHostName();
         setMethodName();
         setClassName();
@@ -72,10 +74,10 @@ public class CommentAssistant {
     }
 
     private static void setTime() {
-        //The specific format the time should be printed in
+        // The specific format the time should be printed in
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd HH:mm:ss");
 
-        //Gets the current time
+        // Gets the current time
         LocalDateTime now = LocalDateTime.now();
 
         time = dtf.format(now);
@@ -133,5 +135,9 @@ public class CommentAssistant {
     
     public static String getTime() {
         return time;
+    }
+
+    public static String getFinalString() {
+        return finalString;
     }
 }

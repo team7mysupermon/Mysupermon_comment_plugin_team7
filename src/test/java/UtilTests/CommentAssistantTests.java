@@ -11,33 +11,33 @@ import java.time.*;
 import java.time.Month;
 
 public class CommentAssistantTests {
-    static String expectedLocalHost = "testLocalHost";
-    static String expectedIP = "192.168.0.9";
+    static String expectedHost = "testHost";
+    static String expectedIP = "1.2.3.4";
 
     @BeforeAll
     public static void setUp() {
-        //Creating mock for date time
+        // Creating mock for date time
         LocalDateTime dateTime = LocalDateTime.of(2015, Month.JULY, 29, 19, 30, 40);
         mockStatic(LocalDateTime.class);
         when(LocalDateTime.now()).thenReturn(dateTime);
 
-        //Creating mock for InetAddress. IP + Hostname
+        // Creating mock for InetAddress. IP + Hostname
         try {
             InetAddress address = InetAddress.getByName(expectedIP);
             mockStatic(InetAddress.class);
             when(InetAddress.getLocalHost()).thenReturn(address);
-            when(InetAddress.getLocalHost().getHostName()).thenReturn(expectedLocalHost);
+            when(InetAddress.getLocalHost().getHostName()).thenReturn(expectedHost);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        //Calling class with test string
+        // Calling class with test string
         CommentAssistant.addSystemData("test");
     }
 
     @Test
     public void getLocalHostName_ReturnsHostNameAndIP() {
-        String expected = expectedLocalHost + "/" + expectedIP;
+        String expected = expectedHost + "/" + expectedIP;
         String actual = CommentAssistant.getLocalHostName();
 
         Assertions.assertEquals(expected, actual);
@@ -45,14 +45,14 @@ public class CommentAssistantTests {
 
     @Test
     public void getHostName_ReturnsHostName(){
-        String expected = expectedLocalHost;
+        String expected = expectedHost;
         String actual = CommentAssistant.getHostName();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    public void getIP_ReturnsIpAdress(){
+    public void getIP_ReturnsIpAddress(){
         String expected = expectedIP;
         String actual= CommentAssistant.getIP();
 
@@ -88,6 +88,20 @@ public class CommentAssistantTests {
     public void getPackageName_GivenClassHasPackage_ReturnsPackageName(){
         String expected = "UtilTests";
         String actual = CommentAssistant.getPackageName();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getFinalString_GivenAddSystemDataWithParameterTest_ReturnsTestWithSystemData() {
+        String expected = "test/*{\"METHODNAME\":\"setUp\"," +
+                                "\"HOST_NAME\":\"" + expectedHost + "\"," +
+                                "\"LOCALHOST\":\"" + expectedHost + "/" + expectedIP + "\"," +
+                                "\"IP_ADDRESS\":\"" + expectedIP + "\"," +
+                                "\"CLASSNAME\":\"UtilTests.CommentAssistantTests\"," +
+                                "\"CURRENT_TIME\":\"2015/07/29 19:30:40\"," +
+                                "\"PACKAGENAME\":\"UtilTests\"}*/";
+        String actual = CommentAssistant.getFinalString();
 
         Assertions.assertEquals(expected, actual);
     }
