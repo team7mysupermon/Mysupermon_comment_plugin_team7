@@ -11,17 +11,17 @@ import java.time.*;
 import java.time.Month;
 
 public class CommentAssistantTests {
-    static String expectedHost = "testHost";
-    static String expectedIP = "1.2.3.4";
+    private static final String expectedHost = "testHost";
+    private static final String expectedIP = "1.2.3.4";
 
     @BeforeAll
     public static void setUp() {
-        // Creating mock for date time
+        // Creating mock for date time.
         LocalDateTime dateTime = LocalDateTime.of(2015, Month.JULY, 29, 19, 30, 40);
         mockStatic(LocalDateTime.class);
         when(LocalDateTime.now()).thenReturn(dateTime);
 
-        // Creating mock for InetAddress. IP + Hostname
+        // Creating mock for InetAddress.
         try {
             InetAddress address = InetAddress.getByName(expectedIP);
             mockStatic(InetAddress.class);
@@ -31,7 +31,7 @@ public class CommentAssistantTests {
             e.printStackTrace();
         }
 
-        // Calling class with test string
+        // Calling class with test string.
         CommentAssistant.addSystemData("test");
     }
 
