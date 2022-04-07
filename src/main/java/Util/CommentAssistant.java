@@ -54,7 +54,7 @@ public class CommentAssistant {
         try {
             hostName = InetAddress.getLocalHost().getHostName();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
     }
@@ -65,7 +65,7 @@ public class CommentAssistant {
         try {
             IP = InetAddress.getLocalHost().getHostAddress();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -98,7 +98,7 @@ public class CommentAssistant {
                 }
             }
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         return null;
@@ -118,7 +118,7 @@ public class CommentAssistant {
         try {
             c = Class.forName(getStackTraceElement().getClassName());
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         packageName = c != null ? c.getPackage().getName() : "";
