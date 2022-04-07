@@ -86,10 +86,14 @@ public class CommentAssistant {
     private static StackTraceElement getStackTraceElement() {
 
         Class <?> c;
+        var thread = Thread.currentThread();
+        var stacktrace = thread.getStackTrace();
         try {
-            c = Class.forName(getStackTraceElement().getClassName());
-            for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
-                if (!c.getPackage().getName().equals("Util") && !c.getPackage().getName().equals("NamedJDBC")) {
+
+            for (StackTraceElement element : stacktrace) {
+                c = Class.forName(element.getClassName());
+                var packagename = c.getPackage().getName();
+                if (!packagename.equals("Util") && !packagename.equals("NamedJDBC") && !packagename.equals("java.lang")) {
                     return element;
                 }
             }
