@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.lang.Nullable;
 
 import javax.sql.DataSource;
@@ -80,5 +81,34 @@ public class MySuperMonNamedParameterJdbcTemplate extends NamedParameterJdbcTemp
     public <T> List<T> query(String sql, RowMapper<T> rowMapper) throws DataAccessException {
         String value = CommentAssistant.addSystemData(sql);
         return super.query(value, rowMapper);
+    }
+
+    @Override
+    public int update(String sql, SqlParameterSource paramSource) throws DataAccessException {
+        String value = CommentAssistant.addSystemData(sql);
+        return super.update(value, paramSource);
+    }
+
+    @Override
+    public int update(String sql, Map<String,?> paramMap) throws DataAccessException {
+        String value = CommentAssistant.addSystemData(sql);
+        return super.update(value, paramMap);
+    }
+
+    @Override
+    public int update(String sql, SqlParameterSource paramSource, KeyHolder generatedKeyHolder) throws DataAccessException {
+        String value = CommentAssistant.addSystemData(sql);
+        return super.update(value, paramSource, generatedKeyHolder);
+    }
+
+    @Override
+    public int update(String sql,
+                      SqlParameterSource paramSource,
+                      KeyHolder generatedKeyHolder,
+                      @Nullable
+                              String[] keyColumnNames)
+            throws DataAccessException {
+        String value = CommentAssistant.addSystemData(sql);
+        return super.update(value, paramSource, generatedKeyHolder, keyColumnNames);
     }
 }
