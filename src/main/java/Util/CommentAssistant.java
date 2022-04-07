@@ -84,7 +84,20 @@ public class CommentAssistant {
     }
 
     private static StackTraceElement getStackTraceElement() {
-        return Thread.currentThread().getStackTrace()[5];
+
+        Class <?> c;
+        try {
+            c = Class.forName(getStackTraceElement().getClassName());
+            for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
+                if (!c.getPackage().getName().equals("Util") && !c.getPackage().getName().equals("NamedJDBC")) {
+                    return element;
+                }
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     private static void setMethodName() {
