@@ -22,6 +22,7 @@ public class CommentAssistant {
 
     public CommentAssistant(Logger logger) {
         this.logger = logger;
+    }
 
     public String addSystemData(String query) {
 
