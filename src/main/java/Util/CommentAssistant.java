@@ -5,19 +5,27 @@ import java.net.InetAddress;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class CommentAssistant {
-    private static String methodName;
-    private static String hostName;
-    private static String localHostName;
-    private static String IP;
-    private static String className;
-    private static String time;
-    private static String packageName;
-    private static String finalString;
+    private String methodName;
+    private String hostName;
+    private String localHostName;
+    private String IP;
+    private String className;
+    private String time;
+    private String packageName;
+    private String finalString;
+    private Logger logger;
 
+    public CommentAssistant(Logger _logger) {
+        this.logger = _logger;
+    }
 
-    public static String addSystemData(String query) {
+    public String addSystemData(String query) {
+
         HashMap<String, Object> map = new HashMap<>();
 
         setVariables();
@@ -38,7 +46,7 @@ public class CommentAssistant {
         return finalString;
     }
 
-    private static void setVariables() {
+    private void setVariables() {
         setHostName();
         setMethodName();
         setClassName();
@@ -49,31 +57,31 @@ public class CommentAssistant {
         setLocalHostName();
     }
 
-    private static void setHostName() {
+    private void setHostName() {
         hostName = "";
         try {
             hostName = InetAddress.getLocalHost().getHostName();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, e.getMessage());
         }
 
     }
 
-    private static void setIP() {
+    private void setIP() {
         IP = "";
 
         try {
             IP = InetAddress.getLocalHost().getHostAddress();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, e.getMessage());
         }
     }
 
-    private static void setLocalHostName() {
+    private void setLocalHostName() {
         localHostName = hostName + "/" + IP;
     }
 
-    private static void setTime() {
+    private void setTime() {
         // The specific format the time should be printed in
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd HH:mm:ss");
 
@@ -83,7 +91,7 @@ public class CommentAssistant {
         time = dtf.format(now);
     }
 
-    private static StackTraceElement getStackTraceElement() {
+    private StackTraceElement getStackTraceElement() {
 
         Class <?> c;
         var thread = Thread.currentThread();
@@ -98,27 +106,27 @@ public class CommentAssistant {
                 }
             }
         } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, e.getMessage());
         }
 
         return null;
     }
 
-    private static void setMethodName() {
+    private void setMethodName() {
         methodName = getStackTraceElement().getMethodName();
     }
 
-    private static void setClassName() {
+    private void setClassName() {
         className = getStackTraceElement().getClassName();
     }
 
-    private static void setPackageName() {
+    private void setPackageName() {
         Class<?> c = null;
 
         try {
             c = Class.forName(getStackTraceElement().getClassName());
         } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, e.getMessage());
         }
 
         packageName = c != null ? c.getPackage().getName() : "";
@@ -126,35 +134,35 @@ public class CommentAssistant {
 
     
     // Getters
-    public static String getMethodName() {
+    public String getMethodName() {
         return methodName;
     }
 
-    public static String getClassName() {
+    public String getClassName() {
         return className;
     }
     
-    public static String getPackageName() {
+    public String getPackageName() {
         return packageName;
     }
 
-    public static String getIP() {
+    public String getIP() {
         return IP;
     }
 
-    public static String getHostName() {
+    public String getHostName() {
         return hostName;
     }
 
-    public static String getLocalHostName() {
+    public String getLocalHostName() {
         return localHostName;
     }
     
-    public static String getTime() {
+    public String getTime() {
         return time;
     }
 
-    public static String getFinalString() {
+    public String getFinalString() {
         return finalString;
     }
 }
