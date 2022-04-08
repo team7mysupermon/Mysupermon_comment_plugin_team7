@@ -9,14 +9,19 @@ import static org.mockito.Mockito.*;
 import java.net.InetAddress;
 import java.time.*;
 import java.time.Month;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CommentAssistantTests {
     private static final String expectedHost = "testHost";
     private static final String expectedIP = "1.2.3.4";
+    private static CommentAssistant commentAssistant;
 
     @BeforeAll
-    public static void setUp() {
+    static void setUp() {
         // Creating mock for date time.
+        Logger logger = Logger.getGlobal();
+        commentAssistant = new CommentAssistant(logger);
         LocalDateTime dateTime = LocalDateTime.of(2015, Month.JULY, 29, 19, 30, 40);
         mockStatic(LocalDateTime.class);
         when(LocalDateTime.now()).thenReturn(dateTime);
@@ -28,17 +33,17 @@ public class CommentAssistantTests {
             when(InetAddress.getLocalHost()).thenReturn(address);
             when(InetAddress.getLocalHost().getHostName()).thenReturn(expectedHost);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, e.getMessage());
         }
 
         // Calling class with test string.
-        CommentAssistant.addSystemData("test");
+        commentAssistant.addSystemData("test");
     }
 
     @Test
     public void getLocalHostName_ReturnsHostNameAndIP() {
         String expected = expectedHost + "/" + expectedIP;
-        String actual = CommentAssistant.getLocalHostName();
+        String actual = commentAssistant.getLocalHostName();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -46,7 +51,7 @@ public class CommentAssistantTests {
     @Test
     public void getHostName_ReturnsHostName(){
         String expected = expectedHost;
-        String actual = CommentAssistant.getHostName();
+        String actual = commentAssistant.getHostName();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -54,7 +59,7 @@ public class CommentAssistantTests {
     @Test
     public void getIP_ReturnsIpAddress(){
         String expected = expectedIP;
-        String actual= CommentAssistant.getIP();
+        String actual= commentAssistant.getIP();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -63,7 +68,7 @@ public class CommentAssistantTests {
     @Test
     public void getTimeNow_ReturnsCurrentTime() {
         String expected = "2015/07/29 19:30:40";
-        String actual = CommentAssistant.getTime();
+        String actual = commentAssistant.getTime();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -71,7 +76,7 @@ public class CommentAssistantTests {
     @Test
     public void getMethodName_GivenMethodCall_ReturnsMethodName() {
         String expected = "setUp";
-        String actual = CommentAssistant.getMethodName();
+        String actual = commentAssistant.getMethodName();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -79,7 +84,7 @@ public class CommentAssistantTests {
     @Test
     public void getClassName_GivenMethodHasClass_ReturnsClassName() {
         String expected = "UtilTests.CommentAssistantTests";
-        String actual = CommentAssistant.getClassName();
+        String actual = commentAssistant.getClassName();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -87,7 +92,7 @@ public class CommentAssistantTests {
     @Test
     public void getPackageName_GivenClassHasPackage_ReturnsPackageName(){
         String expected = "UtilTests";
-        String actual = CommentAssistant.getPackageName();
+        String actual = commentAssistant.getPackageName();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -101,7 +106,7 @@ public class CommentAssistantTests {
                                 "\"CLASSNAME\":\"UtilTests.CommentAssistantTests\"," +
                                 "\"CURRENT_TIME\":\"2015/07/29 19:30:40\"," +
                                 "\"PACKAGENAME\":\"UtilTests\"}*/";
-        String actual = CommentAssistant.getFinalString();
+        String actual = commentAssistant.getFinalString();
 
         Assertions.assertEquals(expected, actual);
     }
