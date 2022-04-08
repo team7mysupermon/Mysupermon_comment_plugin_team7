@@ -5,19 +5,27 @@ import java.net.InetAddress;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class CommentAssistant {
-    private static String methodName;
-    private static String hostName;
-    private static String localHostName;
-    private static String IP;
-    private static String className;
-    private static String time;
-    private static String packageName;
-    private static String finalString;
+    private String methodName;
+    private String hostName;
+    private String localHostName;
+    private String iP;
+    private String className;
+    private String time;
+    private String packageName;
+    private String finalString;
+    private final Logger logger;
 
+    public CommentAssistant(Logger logger) {
+        this.logger = logger;
+    }
 
-    public static String addSystemData(String query) {
+    public String addSystemData(String query) {
+
         HashMap<String, Object> map = new HashMap<>();
 
         setVariables();
@@ -26,7 +34,7 @@ public class CommentAssistant {
         map.putIfAbsent("METHODNAME", methodName);
         map.putIfAbsent("HOST_NAME", hostName);
         map.putIfAbsent("LOCALHOST", localHostName);
-        map.putIfAbsent("IP_ADDRESS", IP);
+        map.putIfAbsent("IP_ADDRESS", iP);
         map.putIfAbsent("CLASSNAME", className);
         map.putIfAbsent("CURRENT_TIME", time);
         map.putIfAbsent("PACKAGENAME", packageName);
@@ -38,7 +46,7 @@ public class CommentAssistant {
         return finalString;
     }
 
-    private static void setVariables() {
+    private void setVariables() {
         setHostName();
         setMethodName();
         setClassName();
@@ -49,31 +57,31 @@ public class CommentAssistant {
         setLocalHostName();
     }
 
-    private static void setHostName() {
+    private void setHostName() {
         hostName = "";
         try {
             hostName = InetAddress.getLocalHost().getHostName();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, e.getMessage());
         }
 
     }
 
-    private static void setIP() {
-        IP = "";
+    private void setIP() {
+        iP = "";
 
         try {
-            IP = InetAddress.getLocalHost().getHostAddress();
+            iP = InetAddress.getLocalHost().getHostAddress();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, e.getMessage());
         }
     }
 
-    private static void setLocalHostName() {
-        localHostName = hostName + "/" + IP;
+    private void setLocalHostName() {
+        localHostName = hostName + "/" + iP;
     }
 
-    private static void setTime() {
+    private void setTime() {
         // The specific format the time should be printed in
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd HH:mm:ss");
 
@@ -83,25 +91,42 @@ public class CommentAssistant {
         time = dtf.format(now);
     }
 
-    private static StackTraceElement getStackTraceElement() {
-        return Thread.currentThread().getStackTrace()[5];
+    private StackTraceElement getStackTraceElement() {
+
+        Class <?> c;
+        var thread = Thread.currentThread();
+        var stacktrace = thread.getStackTrace();
+        try {
+
+            for (StackTraceElement element : stacktrace) {
+                c = Class.forName(element.getClassName());
+                var packagename = c.getPackage().getName();
+                if (!packagename.equals("Util") && !packagename.equals("NamedJDBC") && !packagename.equals("java.lang")) {
+                    return element;
+                }
+            }
+        } catch (ClassNotFoundException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
+
+        return null;
     }
 
-    private static void setMethodName() {
+    private void setMethodName() {
         methodName = getStackTraceElement().getMethodName();
     }
 
-    private static void setClassName() {
+    private void setClassName() {
         className = getStackTraceElement().getClassName();
     }
 
-    private static void setPackageName() {
+    private void setPackageName() {
         Class<?> c = null;
 
         try {
             c = Class.forName(getStackTraceElement().getClassName());
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, e.getMessage());
         }
 
         packageName = c != null ? c.getPackage().getName() : "";
@@ -109,35 +134,35 @@ public class CommentAssistant {
 
     
     // Getters
-    public static String getMethodName() {
+    public String getMethodName() {
         return methodName;
     }
 
-    public static String getClassName() {
+    public String getClassName() {
         return className;
     }
     
-    public static String getPackageName() {
+    public String getPackageName() {
         return packageName;
     }
 
-    public static String getIP() {
-        return IP;
+    public String getIP() {
+        return iP;
     }
 
-    public static String getHostName() {
+    public String getHostName() {
         return hostName;
     }
 
-    public static String getLocalHostName() {
+    public String getLocalHostName() {
         return localHostName;
     }
     
-    public static String getTime() {
+    public String getTime() {
         return time;
     }
 
-    public static String getFinalString() {
+    public String getFinalString() {
         return finalString;
     }
 }
