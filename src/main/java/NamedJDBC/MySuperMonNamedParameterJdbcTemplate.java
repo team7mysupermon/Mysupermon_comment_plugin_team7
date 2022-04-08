@@ -25,12 +25,6 @@ public class MySuperMonNamedParameterJdbcTemplate extends NamedParameterJdbcTemp
         this.commentAssistant = new CommentAssistant(Logger.getGlobal());
     }
 
-    public static void main(String[] args) {
-        //Only used when testing.
-        String query = "SELECT * FROM difar";
-        //System.out.println(commentAssistant.addSystemData(query));
-    }
-
     @Nullable
     @Override
     public <T> T query(String sql, SqlParameterSource paramSource, ResultSetExtractor<T> rse) throws DataAccessException {

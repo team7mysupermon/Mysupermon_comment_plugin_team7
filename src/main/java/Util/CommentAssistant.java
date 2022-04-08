@@ -13,15 +13,15 @@ public class CommentAssistant {
     private String methodName;
     private String hostName;
     private String localHostName;
-    private String IP;
+    private String iP;
     private String className;
     private String time;
     private String packageName;
     private String finalString;
-    private Logger logger;
+    private final Logger logger;
 
-    public CommentAssistant(Logger _logger) {
-        this.logger = _logger;
+    public CommentAssistant(Logger logger) {
+        this.logger = logger;
     }
 
     public String addSystemData(String query) {
@@ -34,7 +34,7 @@ public class CommentAssistant {
         map.putIfAbsent("METHODNAME", methodName);
         map.putIfAbsent("HOST_NAME", hostName);
         map.putIfAbsent("LOCALHOST", localHostName);
-        map.putIfAbsent("IP_ADDRESS", IP);
+        map.putIfAbsent("IP_ADDRESS", iP);
         map.putIfAbsent("CLASSNAME", className);
         map.putIfAbsent("CURRENT_TIME", time);
         map.putIfAbsent("PACKAGENAME", packageName);
@@ -68,17 +68,17 @@ public class CommentAssistant {
     }
 
     private void setIP() {
-        IP = "";
+        iP = "";
 
         try {
-            IP = InetAddress.getLocalHost().getHostAddress();
+            iP = InetAddress.getLocalHost().getHostAddress();
         } catch (Exception e) {
             logger.log(Level.WARNING, e.getMessage());
         }
     }
 
     private void setLocalHostName() {
-        localHostName = hostName + "/" + IP;
+        localHostName = hostName + "/" + iP;
     }
 
     private void setTime() {
@@ -147,7 +147,7 @@ public class CommentAssistant {
     }
 
     public String getIP() {
-        return IP;
+        return iP;
     }
 
     public String getHostName() {

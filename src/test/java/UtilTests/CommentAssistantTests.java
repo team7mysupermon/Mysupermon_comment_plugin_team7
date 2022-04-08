@@ -12,7 +12,7 @@ import java.time.Month;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CommentAssistantTests {
+class CommentAssistantTests {
     private static final String expectedHost = "testHost";
     private static final String expectedIP = "1.2.3.4";
     private static CommentAssistant commentAssistant;
