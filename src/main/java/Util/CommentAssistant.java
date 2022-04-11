@@ -31,17 +31,26 @@ public class CommentAssistant {
         setVariables();
 
         // Put in the order that they are in the JSON object
+        map.putIfAbsent("IP_ADDRESS", iP);
         map.putIfAbsent("METHODNAME", methodName);
         map.putIfAbsent("HOST_NAME", hostName);
         map.putIfAbsent("LOCALHOST", localHostName);
-        map.putIfAbsent("IP_ADDRESS", iP);
         map.putIfAbsent("CLASSNAME", className);
         map.putIfAbsent("CURRENT_TIME", time);
         map.putIfAbsent("PACKAGENAME", packageName);
 
+
+
+
+
+
+
+
         JSONObject json = new JSONObject(map);
 
         finalString = query.concat("/*" + json + "*/");
+
+        System.out.println(finalString);
 
         return finalString;
     }
