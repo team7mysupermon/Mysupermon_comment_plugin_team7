@@ -3,6 +3,7 @@ package NamedJDBC;
 import Util.CommentAssistant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
@@ -23,6 +24,27 @@ public class MySuperMonNamedParameterJdbcTemplate extends NamedParameterJdbcTemp
     public MySuperMonNamedParameterJdbcTemplate(DataSource dataSource) {
         super(dataSource);
         this.commentAssistant = new CommentAssistant(Logger.getGlobal());
+    }
+
+    @Nullable
+    @Override
+    public <T> T execute(String sql, SqlParameterSource paramSource, PreparedStatementCallback<T> action) throws DataAccessException {
+        String value = commentAssistant.addSystemData(sql);
+        return super.execute(value, paramSource, action);
+    }
+
+    @Nullable
+    @Override
+    public <T> T execute(String sql, Map<String,?> paramMap, PreparedStatementCallback<T> action) throws DataAccessException {
+        String value = commentAssistant.addSystemData(sql);
+        return super.execute(value, paramMap, action);
+    }
+
+    @Nullable
+    @Override
+    public <T> T execute(String sql, PreparedStatementCallback<T> action) throws DataAccessException {
+        String value = commentAssistant.addSystemData(sql);
+        return super.execute(value, action);
     }
 
     @Nullable
