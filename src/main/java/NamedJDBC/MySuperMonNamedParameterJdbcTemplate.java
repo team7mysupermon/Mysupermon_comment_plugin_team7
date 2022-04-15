@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.namedparam.ParsedSql;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
 import javax.sql.DataSource;
@@ -35,7 +36,7 @@ public class MySuperMonNamedParameterJdbcTemplate extends NamedParameterJdbcTemp
 
     @Override
     @Nullable
-    public <T> T execute(String sql, SqlParameterSource paramSource, PreparedStatementCallback<T> action) throws DataAccessException {
+    public <T> T execute(@NonNull String sql, @NonNull SqlParameterSource paramSource, @NonNull PreparedStatementCallback<T> action) throws DataAccessException {
         String value = commentAssistant.addSystemData(sql);
         return super.execute(value, paramSource, action);
     }
