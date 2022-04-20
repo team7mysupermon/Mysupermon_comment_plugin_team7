@@ -1,10 +1,13 @@
 package Util;
 
 import org.json.JSONObject;
+
+import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,26 +28,33 @@ public class CommentAssistant {
     }
 
     public String addSystemData(String query) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            Field changeMap = jsonObject.getClass().getDeclaredField("map");
+            changeMap.setAccessible(true);
+            changeMap.set(jsonObject, new LinkedHashMap<>());
+            changeMap.setAccessible(false);
+        } catch (IllegalAccessException | NoSuchFieldException e) {
 
-        HashMap<String, Object> map = new HashMap<>();
-
+        }
         setVariables();
 
         // Put in the order that they are in the JSON object
-        map.putIfAbsent("METHODNAME", methodName);
-        map.putIfAbsent("HOST_NAME", hostName);
-        map.putIfAbsent("LOCALHOST", localHostName);
-        map.putIfAbsent("IP_ADDRESS", iP);
-        map.putIfAbsent("CLASSNAME", className);
-        map.putIfAbsent("CURRENT_TIME", time);
-        map.putIfAbsent("PACKAGENAME", packageName);
+        jsonObject.put("IP_ADDRESS", iP);
+        jsonObject.put("METHODNAME", methodName);
+        jsonObject.put("CLASSNAME", className);
+        jsonObject.put("CURRENT_TIME", time);
+        jsonObject.put("PACKAGENAME", packageName);
 
-        JSONObject json = new JSONObject(map);
+        System.out.println(jsonObject);
 
-        finalString = query.concat("/*" + json + "*/");
+        finalString = query.concat("/*" + jsonObject + "*/");
+
+        System.out.println(finalString);
 
         return finalString;
-    }
+        }
+
 
     private void setVariables() {
         setHostName();
