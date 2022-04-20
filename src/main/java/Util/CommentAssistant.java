@@ -42,8 +42,6 @@ public class CommentAssistant {
         // Put in the order that they are in the JSON object
         jsonObject.put("IP_ADDRESS", iP);
         jsonObject.put("METHODNAME", methodName);
-        jsonObject.put("HOST_NAME", hostName);
-        jsonObject.put("LOCALHOST", localHostName);
         jsonObject.put("CLASSNAME", className);
         jsonObject.put("CURRENT_TIME", time);
         jsonObject.put("PACKAGENAME", packageName);
