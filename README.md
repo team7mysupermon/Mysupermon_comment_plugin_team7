@@ -1,4 +1,4 @@
-# **Mysupermon Query Comment Library**
+# **Devaten Query System Data Appender Library**
 
 This library was created as a project between Devaten and ITU.
 
@@ -35,27 +35,27 @@ This section explains where to make changes/additions in the code to use the lib
 Find all classes where NamedParameterJdbcTemplate is used and do the following:
 
 1. Find the import of the NamedParameterJdbcTemplate.
-2. Replace it with:import MySuperMon.NamedJDBC.MySuperMonNamedParameterJdbcTemplate;
+2. Replace it with:import MySuperMon.NamedJDBC.QuerySystemDataAppender;
 3. Find the part of the code where the NamedParameterJdbcTemplate object is created and replace it with:
     
     ```java
-    var <name_of_object> = new MySuperMonNamedParameterJdbcTemplate(Same parameters as used previously);
+    var <name_of_object> = new QuerySystemDataAppender(Same parameters as used previously);
     ```
     
 
 ### **If the project is not using NamedParameterJdbcTemplate**
 
-The MySuperMonNamedParameterJdbcTemplate can be used just like NamedParameterJdbcTemplate. 
+The QuerySystemDataAppender can be used just like NamedParameterJdbcTemplate. 
 
 For further explanation of the different methods of NamedParameterJdbcTemplate, use their [documentation](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/jdbc/core/namedparam/NamedParameterJdbcTemplate.html).
 
 Find all classes where queries are needed and do the following:
 
-1. Import the MySuperMonNamedParameterJdbcTemplate.
+1. Import the QuerySystemDataAppender
     
     ```java
-    import MySuperMon.NamedJDBC.MySuperMonNamedParameterJdbcTemplate;
+    import com.devaten.NamedJDBC.QuerySystemDataAppender;
     ```
     
-2. Create a new instance of MySuperMonNamedParameterJdbcTemplate.
+2. Create a new instance of QuerySystemDataAppender.
 3. Use the object to query to the project's database.

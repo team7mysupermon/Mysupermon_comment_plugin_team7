@@ -19,17 +19,17 @@ import java.util.function.Consumer;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
-public class MySuperMonNamedParameterJdbcTemplate extends NamedParameterJdbcTemplate {
+public class QuerySystemDataAppender extends NamedParameterJdbcTemplate {
     private final CommentAssistant commentAssistant;
 
     @Autowired
-    public MySuperMonNamedParameterJdbcTemplate(DataSource dataSource) {
+    public QuerySystemDataAppender(DataSource dataSource) {
         super(dataSource);
         this.commentAssistant = new CommentAssistant(Logger.getGlobal());
     }
 
     @Autowired
-    public MySuperMonNamedParameterJdbcTemplate(JdbcOperations classicJdbcTemplate) {
+    public QuerySystemDataAppender(JdbcOperations classicJdbcTemplate) {
         super(classicJdbcTemplate);
         this.commentAssistant = new CommentAssistant(Logger.getGlobal());
     }
